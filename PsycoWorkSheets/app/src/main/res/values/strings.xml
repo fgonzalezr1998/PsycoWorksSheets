@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PsycoWorkSheets</string>
+
+    <!-- Main Activity -->
+
+    <string name="radio_button_doctor">Doctor</string>
+    <string name="radio_button_patient">Patient</string>
+    <string name="login_button">Log In</string>
+    <string name="patient_signin_button">Patient Sign In</string>
+
+    <!-- Log In Dialog Fragment -->
+
+    <string name="login_fragment_title">LOG IN</string>
+
+    <!-- Sign In Dialog Fragment -->
+
+    <string name="signin_fragment_title">SIGN IN</string>
+</resources>

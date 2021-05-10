@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "2856551433",
+    "project_id": "psycoworksheets",
+    "storage_bucket": "psycoworksheets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2856551433:android:07af28ceb261c1c72024d8",
+        "android_client_info": {
+          "package_name": "com.example.psycoworksheets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2856551433-7dur233q3caoaasnt7j2gt0ddckoqn8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psycoworksheets",
+            "certificate_hash": "fa1f3dd5be53d148357cad06566e1cd0543e48d8"
+          }
+        },
+        {
+          "client_id": "2856551433-ricp8ehn25bjehu6f8a9hjcm0ncg3ubj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa4DeG5cIyD8Lhx-tz9Xaq-X2K89ien6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2856551433-ricp8ehn25bjehu6f8a9hjcm0ncg3ubj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
