@@ -2,6 +2,7 @@ package com.example.psycoworksheets;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,13 @@ public class SigninDialogFragment extends DialogFragment {
     private String errorMsg = "", table;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private SignInFragmentListener fragmentListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        fragmentListener = (SignInFragmentListener) context;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -58,6 +66,10 @@ public class SigninDialogFragment extends DialogFragment {
         signinPassword = (TextView) getDialog().findViewById(R.id.signinPassword);
     }
 
+    public interface SignInFragmentListener {
+        void runSuccessfullySigned(String userName);
+    }
+
     private boolean fieldsOk() {
         boolean ok = true;
         if (emptyFields()) {
@@ -78,7 +90,6 @@ public class SigninDialogFragment extends DialogFragment {
         String password;
 
         password = signinPassword.getText().toString();
-        Log.w("App", password);
 
         return password.length() >= MIN_PSSWD;
     }
@@ -88,7 +99,6 @@ public class SigninDialogFragment extends DialogFragment {
         int posArroba, posPoint;
 
         email = signinEmail.getText().toString();
-        Log.w("App", email);
 
         posArroba = email.indexOf('@');
         if (posArroba <= 1)
@@ -128,6 +138,7 @@ public class SigninDialogFragment extends DialogFragment {
                         mDatabase.child("Users").child(table).child(id.get()).setValue(map);
                     }
                 });
+            fragmentListener.runSuccessfullySigned(signinName.getText().toString());
         } else {
             reportError();
         }
@@ -135,7 +146,6 @@ public class SigninDialogFragment extends DialogFragment {
 
     private void getArgs() {
         table = getArguments().getString("table");
-        Log.w("App", "Table: " + table);
     }
 
     private void reportError() {

@@ -5,14 +5,14 @@ android:layout_height="match_parent"
 android:orientation="vertical">
 
 <TextView
-    android:id="@+id/signinFragmentTitle"
+    android:id="@+id/loginFragmentTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:textSize="35dp"
     android:background="@color/orange"
     android:textColor="#FFFF"
-    android:text="@string/signin_fragment_title" />
+    android:text="@string/login_fragment_title" />
 
 <EditText
     android:id="@+id/editTextTextPersonName"

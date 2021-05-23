@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        SigninDialogFragment.SignInFragmentListener {
 
     private RadioButton radioButtonDoctor, radioButtonPatient;
     private Button loginButton, patientSignInButton;
@@ -37,6 +38,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void runSuccessfullySigned(String userName) {
+        SuccessfullySignedDialogFragment successfullySigned = new SuccessfullySignedDialogFragment();
+
+        Bundle args = new Bundle();
+        args.putString("user_name", userName);
+
+        successfullySigned.setArguments(args);
+        successfullySigned.show(getSupportFragmentManager(), "succesfully_signed_fragment");
+    }
+
     private boolean noRolSelected() {
         return !(radioButtonPatient.isChecked() || radioButtonDoctor.isChecked());
     }
@@ -52,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         args.putString("table", getRol() + "s");
 
         signInDialogFragment.setArguments(args);
-        signInDialogFragment.show(getSupportFragmentManager(), "Signin_fragment");
+        signInDialogFragment.show(getSupportFragmentManager(), "signin_fragment");
     }
 
     private String getRol() {

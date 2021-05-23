@@ -6,7 +6,7 @@
     <string name="radio_button_doctor">Doctor</string>
     <string name="radio_button_patient">Patient</string>
     <string name="login_button">Log In</string>
-    <string name="patient_signin_button">Patient Sign In</string>
+    <string name="patient_signin_button">Sign In</string>
 
     <!-- Log In Dialog Fragment -->
 
