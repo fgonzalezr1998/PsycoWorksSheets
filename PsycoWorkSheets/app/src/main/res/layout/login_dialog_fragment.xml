@@ -15,15 +15,15 @@ android:orientation="vertical">
     android:text="@string/login_fragment_title" />
 
 <EditText
-    android:id="@+id/editTextTextPersonName"
+    android:id="@+id/editTextemail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ems="10"
-    android:hint="Username"
-    android:inputType="textPersonName" />
+    android:hint="E-mail"
+    android:inputType="textEmailAddress" />
 
 <EditText
-    android:id="@+id/editTextTextPassword"
+    android:id="@+id/editTextPassword"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ems="10"

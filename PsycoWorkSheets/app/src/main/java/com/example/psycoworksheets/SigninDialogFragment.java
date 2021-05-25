@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -130,7 +131,8 @@ public class SigninDialogFragment extends DialogFragment {
                 task -> {
                     if (task.isSuccessful()) {
                         mDatabase = FirebaseDatabase.getInstance().getReference();
-                        id.set(mAuth.getCurrentUser().getUid());
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        id.set(user.getUid());
                         map.put("name", signinName.getText().toString());
                         map.put("surname", signinSurname.getText().toString());
                         map.put("email", signinEmail.getText().toString());

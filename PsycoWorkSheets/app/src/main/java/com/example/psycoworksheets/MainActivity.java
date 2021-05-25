@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        SigninDialogFragment.SignInFragmentListener {
+        SigninDialogFragment.SignInFragmentListener, LogInDialogFragment.LogInFragmentListener {
 
     private RadioButton radioButtonDoctor, radioButtonPatient;
     private Button loginButton, patientSignInButton;
@@ -47,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         successfullySigned.setArguments(args);
         successfullySigned.show(getSupportFragmentManager(), "succesfully_signed_fragment");
+    }
+
+    @Override
+    public void runUserWs(FirebaseUser user) {
+        Log.w("App", "Run the new activity!");
     }
 
     private boolean noRolSelected() {
