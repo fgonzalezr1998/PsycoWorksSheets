@@ -121,7 +121,7 @@ public class SigninDialogFragment extends DialogFragment {
     }
 
     private void signIn() {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         AtomicReference<String> id = new AtomicReference<>("");
 
         if (fieldsOk()) {

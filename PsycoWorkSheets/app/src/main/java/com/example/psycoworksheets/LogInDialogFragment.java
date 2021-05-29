@@ -78,7 +78,7 @@ public class LogInDialogFragment extends DialogFragment {
                         Toast.makeText(this.context, "Something bad happened",
                                 Toast.LENGTH_SHORT).show();
                     else
-                        fragmentListener.runUserWs(user);
+                        fragmentListener.runUserWs();
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("LogInDialog", "signInWithEmail:failure", task.getException());
@@ -91,6 +91,6 @@ public class LogInDialogFragment extends DialogFragment {
     public interface LogInFragmentListener {
         // Run the user Workspace
 
-        void runUserWs(FirebaseUser user);
+        void runUserWs();
     }
 }

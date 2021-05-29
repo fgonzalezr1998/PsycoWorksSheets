@@ -2,6 +2,7 @@ package com.example.psycoworksheets;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
@@ -52,8 +54,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void runUserWs(FirebaseUser user) {
-        Log.w("App", "Run the new activity!");
+    public void runUserWs() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        Bundle args = new Bundle();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        args.putString("table", getRol() + "s");
+
+        intent.putExtras(args);
+        startActivity(intent);
     }
 
     private boolean noRolSelected() {
