@@ -4,65 +4,35 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class ProfileActivity extends Activity {
+public class ProfileActivity extends Activity implements DatabaseHandler.ValueListener.UserListener{
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private String table;
+    private DatabaseHandler.User selectedUser = null;
 
-    public static class User {
-        public String email;
-        public String name;
-        public String surname;
+    // This attributes have to be static because it is used by an inner class!
+    private static TextView profileNameText;
+    private static String table;
 
-        public User() {
-            // Empty constructor
-        }
+    private ImageView profileAvatar;
 
-        public User(String email, String name, String surname) {
-            this.email = email;
-            this.name = name;
-            this.surname = surname;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-        public String getName() {
-            return name;
-        }
-        public String getSurname() {
-            return surname;
-        }
-    }
-
-    class ValueListener implements ValueEventListener {
-
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            // Get Post object and use the values to update the UI
-            User user = dataSnapshot.getValue(User.class);
-            Log.w("Profile", user.getName());
-            // ..
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            // Getting Post failed, log a message
-            Log.w("Profile", "loadPost:onCancelled", databaseError.toException());
+    @Override
+    public void setUser(DatabaseHandler.User user) {
+        this.selectedUser = user;
+        if (selectedUser == null) {
+            Toast.makeText(this, "Bad credentials!", Toast.LENGTH_LONG).show();
+        } else {
+            String str = "";
+            if (table.equals("Doctors")) {
+                str = "Dr. ";
+            }
+            str += selectedUser.getName();
+            profileNameText.setText(str);
         }
     }
 
@@ -70,10 +40,21 @@ public class ProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        // Initialize attributes
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        profileNameText = (TextView) findViewById(R.id.profileNameText);
+        profileAvatar = (ImageView) findViewById(R.id.profileImage);
+
+        profileAvatar.setImageResource(R.drawable.empty_profile);
+
         initParams();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.w("Profile", "Destroyed!");
     }
 
     private void initParams() {
@@ -84,10 +65,11 @@ public class ProfileActivity extends Activity {
 
         table = args.getString("table");
 
+        // Get the current user data
+
         String uid = mAuth.getCurrentUser().getUid();
-
-        // I need to access to the DB and get the fields of the user
-
-        mDatabase.child("Users").child(table).child(uid).getRef().addValueEventListener(new ValueListener());
+        if (uid == null)
+            return;
+        DatabaseHandler.getInstance(this).getUserById(table, uid);  // Get data from database
     }
 }

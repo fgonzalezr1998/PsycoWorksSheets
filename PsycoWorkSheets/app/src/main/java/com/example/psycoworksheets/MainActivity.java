@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         SigninDialogFragment.SignInFragmentListener, LogInDialogFragment.LogInFragmentListener {
@@ -57,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void runUserWs() {
         Intent intent = new Intent(this, ProfileActivity.class);
         Bundle args = new Bundle();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         args.putString("table", getRol() + "s");
 
