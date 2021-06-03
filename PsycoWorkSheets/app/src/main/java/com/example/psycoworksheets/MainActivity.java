@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         SigninDialogFragment.SignInFragmentListener, LogInDialogFragment.LogInFragmentListener {
 
@@ -21,6 +23,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         initParams();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            FirebaseAuth.getInstance().signOut();
+        }
     }
 
     @Override
@@ -58,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (rol.equals("Patient")) {
             intent = new Intent(this, ProfileActivity.class);
         } else {
-            // Aqui hay que poner otra activity
             intent = new Intent(this, SidePanelActivity.class);
         }
 

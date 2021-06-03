@@ -14,8 +14,6 @@ import androidx.fragment.app.DialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 public class LogInDialogFragment extends DialogFragment {
 
     private EditText userMail, userPsswd;

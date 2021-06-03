@@ -26,6 +26,8 @@ public class ProfileActivity extends Activity implements DatabaseHandler.ValueLi
         this.selectedUser = user;
         if (selectedUser == null) {
             Toast.makeText(this, "Bad credentials!", Toast.LENGTH_LONG).show();
+            mAuth.signOut();
+            this.finish();
         } else {
             String str = "";
             if (table.equals("Doctors")) {
@@ -55,6 +57,7 @@ public class ProfileActivity extends Activity implements DatabaseHandler.ValueLi
     protected void onDestroy() {
         super.onDestroy();
         Log.w("Profile", "Destroyed!");
+        mAuth.signOut();
     }
 
     private void initParams() {

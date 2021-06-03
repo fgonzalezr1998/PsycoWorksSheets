@@ -2,6 +2,7 @@ package com.example.psycoworksheets;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class SidePanelActivity extends AppCompatActivity implements DatabaseHand
     private TextView panelUserName, sidePanelEmail;
     private static String table;
     private FirebaseAuth mAuth;
-    private DatabaseHandler.User selectedUser = null;
+    public DatabaseHandler.User selectedUser = null;
     private NavigationView navigationView;
 
     @Override
@@ -75,6 +76,13 @@ public class SidePanelActivity extends AppCompatActivity implements DatabaseHand
                 || super.onSupportNavigateUp();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.w("Side Panel", "Destroyed!");
+        mAuth.signOut();
+    }
+
     private void initParams() {
         // Get Activity input arguments
 
@@ -96,12 +104,15 @@ public class SidePanelActivity extends AppCompatActivity implements DatabaseHand
         this.selectedUser = user;
         if (selectedUser == null) {
             Toast.makeText(this, "Bad credentials!", Toast.LENGTH_LONG).show();
+            mAuth.signOut();
+            this.finish();
         } else {
             String str = "";
             if (table.equals("Doctors")) {
                 str = "Dr. ";
             }
             str += selectedUser.getName();
+            Log.w("Side Panel", str);
             panelUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.sidePanelUserName);
             sidePanelEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.sidePanelEmail);
             panelUserName.setText(str);
