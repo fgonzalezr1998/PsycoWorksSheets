@@ -51,7 +51,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void runUserWs() {
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent;
+
+        String rol = getRol();
+
+        if (rol.equals("Patient")) {
+            intent = new Intent(this, ProfileActivity.class);
+        } else {
+            // Aqui hay que poner otra activity
+            intent = new Intent(this, SidePanelActivity.class);
+        }
+
         Bundle args = new Bundle();
 
         args.putString("table", getRol() + "s");

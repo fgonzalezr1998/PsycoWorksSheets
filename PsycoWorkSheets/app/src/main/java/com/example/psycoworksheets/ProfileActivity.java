@@ -39,7 +39,7 @@ public class ProfileActivity extends Activity implements DatabaseHandler.ValueLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_patient_profile);
         // Initialize attributes
 
         mAuth = FirebaseAuth.getInstance();
